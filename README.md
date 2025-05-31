@@ -237,3 +237,155 @@ return (
     </>
   )
 ```
+
+![Tabla sin contenido](./CRUD%20Final/src/assets/tabla%20vacia.png)
+
+Para poder mostrar datos en la tabla sera necesaria una función que actualize constantemente el contenido de esta.
+
+Por eso se utilizo ``useEfect`` para reflejar los registros de la base de datos en la tabla a tiempo real. Se llamán las operaciones CRUD desde la API usando el ``fetch``.
+
+### Función GET
+
+```javascript
+//Mostrar cliente
+  useEffect( () => {
+    fetch ('http://localhost:3000/clientes') //Invoca la API a traves de la ruta local
+    .then((res) => {
+      return res.json();
+    }) // Se reciben los datos de la API como un JSON, se desestructuran los datos y se insertan dentro del arreglo de clientes.
+    . then((data) => {
+      console.log('data desde API', data);
+      setClientes(data)
+    })
+  }, [])
+```
+
+### Función POST
+
+```javascript
+// Agregar cliente
+  const Agregar = () => {
+    if (!nombre || !correo || !telefono) { // si algunos de los campos esta vacio mostrara un mensaje
+        alert("Ingresa todos los datos.") // y no permitira llevar a cabo la inserción
+        return;
+    }
+    fetch('http://localhost:3000/clientes/agregar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' } // Formatea la petición en JSON para que sea recibida por la API,
+      body: JSON.stringify({ nombre, correo, telefono }) // cambia lo recibido a traves de las peticiones a STRING para poder ser insertado dentro del arreglo de Clientes.
+    })
+      .then(res => res.text())
+      .then(msg => {
+        alert(msg) // Despliega un mensaje en el navegador que confirma o muestra un error.
+        window.location.reload() // Recarga la pagina si la acción fue completada con exito.
+      })
+  }
+```
+
+### Función PUT
+
+```javascript
+// Actualizar cliente
+  const Actualizar = () => {
+    if (!id || !nombre || !correo || !telefono) {
+        alert("Ingresa todos los datos.")
+        return;
+    }
+
+    fetch(`http://localhost:3000/clientes/editar/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, correo, telefono })
+    })
+      .then(res => res.text())
+      .then(msg => {
+        alert(msg)
+        window.location.reload()
+      })
+  }
+```
+
+### Función DELETE
+
+```javascript
+// Eliminar cliente
+  const Eliminar = () => {
+    if (!id) {
+        alert("La ID no ha sido ingresada.")
+        return;
+    }
+
+    fetch(`http://localhost:3000/clientes/borrar/${id}`, {
+      method: 'DELETE'
+    })
+      .then(res => res.text())
+      .then(msg => {
+        alert(msg)
+        window.location.reload()
+      })
+  }
+```
+
+Tras preparar los metodos creamos el formulario por donde ingresaremos los datos a traves de inputs de texto.
+
+Varios contenedores ``div`` fueron colocados para eventualmente aplicar estilo ``css``.
+
+```javascript
+<div class="card">
+            <form>
+                <div> 
+                    <input type="text" 
+                    value={nombre} onChange={(e) => setNombre(e.target.value) /*Enviar valor ingresado a la API*/} />
+                        <label>Nombre</label>
+                </div>
+                <div>
+                    <input type="text" 
+                    value={correo} onChange={(e) => setCorreo(e.target.value)} />
+                        <label>Correo</label>
+                </div>
+                <div>
+                    <input type="text" 
+                    value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+                        <label>Teléfono</label>
+                </div>
+                <div>
+                <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
+                <label>ID</label>
+                <p>El ID es solo requerido para Actualizar o Eliminar</p>
+                </div>
+                <br />
+            </form>
+                <div class="botones" /* Llamar funciones CRUD al pulsar cada botón */>
+                    <button onClick={Agregar} className='button'>Guardar</button>
+                    <button onClick={Actualizar} className='button'>Actualizar</button>
+                    <button onClick={Eliminar} className='button'>Eliminar</button>
+                </div>
+        </div>
+```
+
+![Input sin estilo](./CRUD%20Final/src/assets/inputsnostyle.png)
+
+Una vez colocados todos los metodos e inputs, al iniciar la API ya deberia mostrarse el contenido de la base de datos en la liste e igualmente deberia funcionar la insercion, actualización y eliminación de registros.
+
+![](./CRUD%20Final/src/assets/front+backnostyle.png)
+![](./CRUD%20Final/src/assets/front+backnostyleinsercion.png)
+![](./CRUD%20Final/src/assets/front+backnostyleinsercionexitosa.png)
+![](./CRUD%20Final/src/assets/resultadoinsercionnostyle.png)
+
+# FINALMENTE
+
+Si así lo desea, puede aplicar estilo para que su formulario CRUD se vea muchisimo mejor.
+
+Se han usado elementos de la siguiente página para los estilos ``CSS``:
+
+https://uiverse.io/
+
+* Formulario: https://uiverse.io/Yaseen549/chilly-dragon-64
+
+* Inputs: https://uiverse.io/mrhyddenn/fluffy-bird-66
+
+* Botones: https://uiverse.io/mrhyddenn/stale-cheetah-42
+
+Modificando los input y botones ademas de importar los estilos CSS y otras modificaciones, como resultado nos queda la siguiente Aplicación Web.
+
+![](./CRUD%20Final/src/assets/front+back+css.png)
