@@ -87,7 +87,7 @@ A partir de aqui se establecen las operaciones CRUD:
 * UPDATE
 * DELETE
 
-#### Create
+#### CREATE
 
 Se inicia con una petición POST, es necesario que sea asincrona para que no se ejecute ninguna acción hasta que los datos hayan sido obtenidos correctamente.
 
@@ -107,7 +107,7 @@ app.post('/clientes/agregar', async (req,res) => {
 })
 ```
 
-#### Read
+#### READ
 
 Petición GET que tiene como función mostrar todos los datos dentro de la base de datos.
 
@@ -141,7 +141,7 @@ app.put('/clientes/editar/:id', async (req,res) => {
 })
 ```
 
-### DELETE
+#### DELETE
 
 Petición DELETE que elimina el registro indicado por la ID ingresada en la ruta como unico requisito.
 
@@ -367,10 +367,10 @@ Varios contenedores ``div`` fueron colocados para eventualmente aplicar estilo `
 
 Una vez colocados todos los metodos e inputs, al iniciar la API ya deberia mostrarse el contenido de la base de datos en la liste e igualmente deberia funcionar la insercion, actualización y eliminación de registros.
 
-![](./CRUD%20Final/src/assets/front+backnostyle.png)
-![](./CRUD%20Final/src/assets/front+backnostyleinsercion.png)
-![](./CRUD%20Final/src/assets/front+backnostyleinsercionexitosa.png)
-![](./CRUD%20Final/src/assets/resultadoinsercionnostyle.png)
+!["front+nostyle"](./CRUD%20Final/src/assets/front+backnostyle.png)
+!["front+nostyle+insercion"](./CRUD%20Final/src/assets/front+backnostyleinsercion.png)
+!["message"](./CRUD%20Final/src/assets/front+backnostyleinsercionexitosa.png)
+!["tableupdate"](./CRUD%20Final/src/assets/resultadoinsercionnostyle.png)
 
 # FINALMENTE
 
@@ -388,4 +388,6 @@ https://uiverse.io/
 
 Modificando los input y botones ademas de importar los estilos CSS y otras modificaciones, como resultado nos queda la siguiente Aplicación Web.
 
-![](./CRUD%20Final/src/assets/front+back+css.png)
+!["Front+CSS"](./CRUD%20Final/src/assets/front+back+css.png)
+![""](./CRUD%20Final/src/assets/update.gif)
+![""](./CRUD%20Final/src/assets/delete.gif)
