@@ -8,8 +8,6 @@ function App() {
     const [telefono,setTelefono] = useState("")
     const [id, setId] = useState("")
 
-
-
   useEffect( () => {
     fetch ('http://localhost:3000/clientes') //Invoca la API a traves de la ruta local
     .then((res) => {
